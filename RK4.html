@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        #solution th,#solution td{
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+        form th{
+            text-align: left;
+        }
+    </style>
+    <title>RK4 Calculator</title>
+    <script type="text/javascript" >
+    function calculate(){
+        let equation=document.getElementById('equation').value;
+        equation=equation.replace("^", "**");
+        let h=document.getElementById('h').value*1;
+        let Mainy=document.getElementById('y0').value*1;
+        let iterations=document.getElementById('iterations').value*1;
+        let Maint=0;
+        let y=Mainy;
+        let t=Maint;
+        let solution=[];
+        for(let i=0;i<=iterations;i++){
+            f1=eval(equation);
+            t+=(h/2);
+            y+=((h*f1)/2);
+            f2=eval(equation);
+            y=Mainy+((h*f2)/2);
+            f3=eval(equation);
+            t+=(h/2);
+            y=Mainy+(h*f3);
+            f4=eval(equation);
+            solution.push([i,Maint,Mainy,f1,f2,f3,f4]);
+            Maint+=h;
+            Mainy+=((h*(f1+2*f2+2*f3+f4))/6);
+        }
+        let output=["<tr><th>k</th><th>t<sub>k</sub></th><th>y<sub>k</sub></th><th>f1</th><th>f2</th><th>f3</th><th>f4</th></tr>"];
+        let temp="";
+        for(let i=0;i<=iterations;i++){
+            temp="<tr>";
+            for(let j=0;j<solution[i].length;j++){
+                temp+="<td>"+solution[i][j]+"</td>";
+            }
+            temp+="</tr>";
+            output.push(temp);
+        }
+        document.getElementById("solution").innerHTML="";
+        output.forEach(a => {
+            console.log(a);
+            document.getElementById("solution").innerHTML+=a;
+        });
+        
+    
+    }
+    </script>
+</head>
+<body>
+    <h1>RK4</h1>
+    <form onsubmit="return false;" >
+        <table >
+        <tr>
+            <th>Equation:</th> <td><input type="text" name="equation" id="equation"></td>
+        </tr>
+        <tr>
+            <th> h: </th><td><input type="number" name="h" id="h" step="0.001"></td>
+        </tr>
+        <tr>
+            <th>Y(0): </th><td><input type="number" name="y0" id="y0"></td>
+        </tr>
+        <tr>
+            <th>iterations: </th><td><input type="number" name="iterations" id="iterations"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+        <button onclick="calculate()">Calculate</button></td>
+        </tr>
+        </table>
+    </form>
+    <table id="solution">
+
+    </table>
+</body>
+</html>
