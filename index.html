@@ -1,48 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>GPA</title>
     <script>
-        function Change(){
-            let courses=document.forms[0].elements['CoursesNum'].value;
-            Hide();
-            for(let i=1;i<=courses;i++){
-                let n="row"+i;
-                document.getElementById(n).style.visibility="visible";
-            }
-        }
-        function Hide(){
-            for(let i=2;i<=7;i++){
-                let n="row"+i;
-                document.getElementById(n).style.visibility="hidden";
-            }
-        }
-        function Calc(){
-            let courses=document.forms[0].elements['CoursesNum'].value*1;
-            console.log(courses);
-            sum=0;
-            hours=0;
-            for(let i=1;i<=courses;i++){
-                let n="m"+i;
-                let temp=(document.forms[0].elements[n].value*1.0);
-                console.log(`${temp}`);
-                n="w"+i;
-                let a=(temp*document.forms[0].elements[n].value);
-                //console.log(`${a}`);
-                sum+=a;
-                hours+=(document.forms[0].elements[n].value*1.0);
-            }
-            let GPA=sum/hours;
-            document.getElementById("output").innerHTML="  Your GPA is:  "+GPA;
-        }
     </script>
     <style>
-        table,th,td{
-            border: 3px solid black;
-            border-collapse: collapse;
-            padding: 10px;
-        }
         input{
             border:0px solid black;
             border-radius: 10%;
@@ -50,10 +13,14 @@
 
 
     </style>
+    <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
-    <table>
-        <tr><td onclick="window.location.href='RK4.html'">RK4</td></a></tr>
+    <table id="Pageheader">
+        <tr>
+            <td onclick="window.location.href='RK4.html'">RK4</td>
+            <td onclick="window.location.href='CH7.html'">Ch7</td>
+        </tr>
     </table>
 
     <form method="post" onsubmit="return false">

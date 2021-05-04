@@ -10,53 +10,16 @@
             text-align: left;
         }
     </style>
+    <link rel="stylesheet" href="styles.css">
     <title>RK4 Calculator</title>
-    <script type="text/javascript" >
-    function calculate(){
-        let equation=document.getElementById('equation').value;
-        equation=equation.replace("^", "**");
-        let h=document.getElementById('h').value*1;
-        let Mainy=document.getElementById('y0').value*1;
-        let iterations=document.getElementById('iterations').value*1;
-        let Maint=0;
-        let y=Mainy;
-        let t=Maint;
-        let solution=[];
-        for(let i=0;i<=iterations;i++){
-            f1=eval(equation);
-            t+=(h/2);
-            y+=((h*f1)/2);
-            f2=eval(equation);
-            y=Mainy+((h*f2)/2);
-            f3=eval(equation);
-            t+=(h/2);
-            y=Mainy+(h*f3);
-            f4=eval(equation);
-            solution.push([i,Maint,Mainy,f1,f2,f3,f4]);
-            Maint+=h;
-            Mainy+=((h*(f1+2*f2+2*f3+f4))/6);
-        }
-        let output=["<tr><th>k</th><th>t<sub>k</sub></th><th>y<sub>k</sub></th><th>f1</th><th>f2</th><th>f3</th><th>f4</th></tr>"];
-        let temp="";
-        for(let i=0;i<=iterations;i++){
-            temp="<tr>";
-            for(let j=0;j<solution[i].length;j++){
-                temp+="<td>"+solution[i][j]+"</td>";
-            }
-            temp+="</tr>";
-            output.push(temp);
-        }
-        document.getElementById("solution").innerHTML="";
-        output.forEach(a => {
-            console.log(a);
-            document.getElementById("solution").innerHTML+=a;
-        });
-        
-    
-    }
-    </script>
+    <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
+    <table id="Pageheader">
+        <tr>
+            <td onclick="window.location.href='index.html'">Home</td>
+        </tr>
+    </table>
     <h1>RK4</h1>
     <form onsubmit="return false;" >
         <table >

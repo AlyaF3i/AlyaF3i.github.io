@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CH7</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+    <table id="Pageheader">
+        <tr>
+            <td onclick="window.location.href='index.html'">Home</td>
+        </tr>
+    </table>
+    <form onsubmit="return false;">
+        <table>
+        <tr>
+            <td colspan="2">
+                <select style="width:100%" name="method" id="method">
+                    <option value="0">Newton-Cotes</option>
+                    <option value="1">Simpson's</option>
+                    <option value="2">Simpson's 8/3</option>
+                    <option value="3">Boole's</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Equation: </td>
+            <td><input type="text" id="equation"></td>
+        </tr>
+        <tr>
+            <td>b: </td>
+            <td><input type="number" id="b"></td>
+        </tr>
+        <tr>
+            <td>a: </td>
+            <td><input type="number" id="a"></td>
+        </tr>
+        <tr>
+            <td><button onclick="integration()" >Calculate</button></td>
+        </tr>
+        </table>
+    </form>
+    <div id="solution">
+    </div>
+</body>
+</html>
