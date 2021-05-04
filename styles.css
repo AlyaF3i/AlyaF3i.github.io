@@ -5,3 +5,7 @@ table#Pageheader th,table#Pageheader td{
 table#Pageheader{
     border-spacing: 10px;
 }
+table#normalTable, table#normalTable th, table#normalTable td{
+    border: 2px solid black;
+    border-collapse:collapse;
+}
