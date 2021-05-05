@@ -40,6 +40,46 @@ function calculate(){
     
     }
 
+    function calculateHence(){
+        let equation=filterEquation(document.getElementById('equation').value);
+        let h=document.getElementById('h').value*1;
+        let yk=document.getElementById('y0').value*1;
+        let iterations=document.getElementById('iterations').value*1;
+        let tk=0;
+        let y=yk;
+        let t=tk;
+        let solution=[`<tr><th>k</th><th>t<sub>k</sub></th><th>f(t<sub>k</sub>,y<sub>k</sub>)</th><th>P<sub>k+1</sub></th><th></th><th>f(t<sub>k+1</sub>,P<sub>k+1</sub>)</th><th>y<sub>k+1</sub></th></tr>`,
+                      `<tr><td>0</td><td>0</td><td>${y}</td><td>-</td><td>-</td><td>-</td></tr>`
+    ];
+        for(let i=1;i<=iterations;i++){
+            ftk=eval(equation)
+            pk=yk+h*ftk;
+            tk1=eval(equation);
+            t=tk1;
+            y=pk;
+            ft1k1=eval(equation);
+            yk1=yk+(h/2)*(ftk+ft1k1);
+            solution.push(`<tr><td>${i}</td><td>${tk}</td><td>${yk}</td><td>-</td><td>-</td><td>-</td></tr>`);
+        }
+        let output=["<tr><th>k</th><th>t<sub>k</sub></th><th>y<sub>k</sub></th><th>f1</th><th>f2</th><th>f3</th><th>f4</th></tr>"];
+        let temp="";
+        for(let i=0;i<=iterations;i++){
+            temp="<tr>";
+            for(let j=0;j<solution[i].length;j++){
+                temp+="<td>"+solution[i][j]+"</td>";
+            }
+            temp+="</tr>";
+            output.push(temp);
+        }
+        document.getElementById("solution").innerHTML="";
+        output.forEach(a => {
+            console.log(a);
+            document.getElementById("solution").innerHTML+=a;
+        });
+        
+    
+    }    
+
 function integration(){
     let method=document.getElementById("method").value*1;
     let equation=filterEquation(document.getElementById("equation").value);
@@ -131,6 +171,8 @@ function integration(){
 }
 function filterEquation(equ){
     equ=equ.replace(" ","");
+    equ=equ.toLowerCase();
+    equ=equ.replace("e","Math.E");
     ["cos", "sin", "tan","cosh","sinh","tanh"].forEach(a=>{
         let b="Math."+a;
         equ=equ.replace(a,b);
