@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+    <html lang="en">
+      <head>
+            <link rel="stylesheet" href="css/style.css">
+            <script type="text/javascript" src="js/script.js"></script>
+        </head>
+        <body>
+        <form id="form1">
+             
+            <input type="radio" id="method" name="method" onchange="show('discrete')" />
+            <label for="method">Discrete probability distribution</label>
+                <input type="radio" name="method" onchange="show('binomial')" />
+                <label>Binomial probability distribution</label>
+                <input type="radio" name="method" onchange="show('poisson')" />
+                <label>Poisson random variable</label><br><br>
+            <label for="amount">Pick the amount of columns: </label>
+            <input type="number" id="amount" onchange="change()" min="0"><br><br>
+            <table class="data">
+                <tr>
+                    <td>x</td>
+                    <td><input type="hidden" id="1" step="0.01"/></td>
+                    <td><input type="hidden" id="2" step="0.01"/></td>
+                    <td><input type="hidden" id="3" step="0.01"/></td>
+                    <td><input type="hidden" id="4" step="0.01"/></td>
+                    <td><input type="hidden" id="5" step="0.01"/></td>
+                    <td><input type="hidden" id="6" step="0.01"/></td>
+                    <td><input type="hidden" id="7" step="0.01"/></td>
+                    <td><input type="hidden" id="8" step="0.01"/></td>
+                    <td><input type="hidden" id="9" step="0.01"/></td>
+                </tr>
+                <tr>
+                    <td>f(x)</td>
+                    <td><input type="hidden" id="10" step="0.01"/></td>
+                    <td><input type="hidden" id="20" step="0.01"/></td>
+                    <td><input type="hidden" id="30" step="0.01"/></td>
+                    <td><input type="hidden" id="40" step="0.01"/></td>
+                    <td><input type="hidden" id="50" step="0.01"/></td>
+                    <td><input type="hidden" id="60" step="0.01"/></td>
+                    <td><input type="hidden" id="70" step="0.01"/></td>
+                    <td><input type="hidden" id="80" step="0.01"/></td>
+                    <td><input type="hidden" id="90" step="0.01"/></td>
+                </tr>
+            </table><br>
+            <input type="button" onclick="calc()" value="Calculate"/>
+            <div class="block" id="discrete">
+            </div>
+            <div class="block" id="binomial">
+                <h1>Binomial probability distribution</h1>
+                <form id="Bino" >
+                    <label>Trials: </label><input type="number"  id="trials"><br>
+                    <label>p: </label><input type="number"  id="p" step="0.01" max="1" min="0"><br>
+                    <label>Probability of X</label>
+                    <select name="sign" id="sign">
+                        <option value="0"><span>&#62;</span></option>
+                        <option value="1">≥</option>
+                        <option value="2"><span>&#60;</span></option>
+                        <option value="3">≤</option>
+                        <option value="4">=</option>
+                      </select>
+                    <input type="number" id="BinoNumber">
+                </form>
+            </div>
+            <div class="block" id="poisson">
+                <h1>Poisson random variable</h1>
+                <form id="Bino" >
+                    <label>Expected Value: </label><input type="number"  id="PoissonMean"><br>
+                    <label>Probability of X</label>
+                    <select name="signP" id="PoissonSign">
+                        <option value="0"><span>&#62;</span></option>
+                        <option value="1">≥</option>
+                        <option value="2"><span>&#60;</span></option>
+                        <option value="3">≤</option>
+                        <option value="4">=</option>
+                      </select>
+                    <input type="number" id="PoissonNumber" step="0.01" max="1" min="0">
+                </form>
+            </div>
+        </form>
+        <div id="answer"></div>
+        </body>
+    </html>

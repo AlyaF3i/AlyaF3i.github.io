@@ -1,0 +1,17 @@
+input[type=number] {
+    width: 30px;
+    background-color: lightskyblue;
+}
+
+
+table.data,table.data td{
+  color:mediumaquamarine;
+  border: 1px double black;
+  border-collapse: collapse;
+  background-color: maroon;
+}
+
+
+.block{
+    display: none;
+}
