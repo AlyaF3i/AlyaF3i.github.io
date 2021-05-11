@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        #form td {
+            margin: 5px;
+        }
+
+    </style>
+    <script>
+        function calculateDistance() {
+            let temp = toMeter(ID("fromDn") * 1, ID("Fromd"));
+            let num = FromMeter(temp, ID("tod"));
+            document.getElementById("toDn").value = `${num}`;
+        }
+        function ID(string) {
+            return document.getElementById(string).value;
+        }
+        function FromMeter(num, name) {
+            if (name == "cm")
+                return num * 100;
+            if (name === "m")
+                return num;
+            if (name === "km")
+                return num / 1000;
+            if (name === "ml")
+                return num/1609.344;
+            if (name === "yard")
+                return num * 1.0936133;
+            if (name === "ft")
+                return num * 3.28;
+            if (name === "inch")
+                return num * 39.37;
+        }
+        function toMeter(num, name) {
+            if (name == "cm")
+                return num / 100;
+            if (name === "m")
+                return num;
+            if (name === "km")
+                return num * 1000;
+            if (name === "ml")
+                return 1609.344 * num;
+            if (name === "yard")
+                return num / 1.0936133;
+            if (name === "ft")
+                return num / 3.28;
+            if (name === "inch")
+                return num / 39.37;
+        }
+        function calculateTemp() {
+            let temp = toCelsius(ID("fromTn") * 1, ID("Fromt"));
+            let num = FromCelsius(temp, ID("tot"));
+            document.getElementById("toTn").value = `${num}`;
+        }
+        function ID(string) {
+            return document.getElementById(string).value;
+        }
+        function FromCelsius(num, name) {
+            if (name == "f")
+                return (num) * 9 / 5 + 32;
+            else if (name === "k")
+                return num + 273.15;
+            else
+                return num;
+
+        }
+        function toCelsius(num, name) {
+            if (name == "f")
+                return (num - 32) * 5 / 9;
+            else if (name === "k")
+                return num - 273.15;
+            else
+                return num;
+
+        }
+    </script>
+</head>
+<!---->
+<body>
+    <form onsubmit="return false;">
+        <table id="form">
+            <tr>
+                <td colspan="4"><h1>Lenght</h1></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <h1>From: </h1>
+                </td>
+                <td>
+                    <input placeholder="Enter Value" type="number" oninput="calculateDistance()" id="fromDn" step="0.0001"><br>
+                    <select oninput="calculateDistance()" id="Fromd">
+                        <option value="cm">Centimeters</option>
+                        <option value="m">Meters</option>
+                        <option value="km">Kilometers</option>
+                        <option value="ml">Miles</option>
+                        <option value="yard">Yard</option>
+                        <option value="ft">Foot</option>
+                        <option value="inch">Inch</option>
+                    </select>
+                </td>
+                <td>
+                    <h1>To: </h1>
+                </td>
+                <td>
+                    <input type="text" id="toDn" step="0.0001" disabled><br>
+                    <select oninput="calculateDistance()" id="tod">
+                        <option value="cm">Centimeters</option>
+                        <option value="m">Meters</option>
+                        <option value="km">Kilometers</option>
+                        <option value="ml">Miles</option>
+                        <option value="yard">Yard</option>
+                        <option value="ft">Foot</option>
+                        <option value="inch">Inch</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><h1>Temperature</h1></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>
+                    <h1>From: </h1>
+                </td>
+                <td>
+                    <input placeholder="Enter Value" oninput="calculateTemp()" type="number" id="fromTn" step="0.0001"><br>
+                    <select oninput="calculateTemp()" id="Fromt">
+                        <option value="c">Celsius</option>
+                        <option value="f">Fahrenheit</option>
+                        <option value="k">Kelvin</option>
+                    </select>
+                </td>
+                <td>
+                    <h1 colspan="6">To: </h1>
+                </td>
+                <td>
+                    <input type="text" id="toTn" step="0.0001" disabled><br>
+                    <select oninput="calculateTemp()" id="tot">
+                        <option value="c">Celsius</option>
+                        <option value="f">Fahrenheit</option>
+                        <option value="k">Kelvin</option>
+                    </select>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</body>
+
+</html>
