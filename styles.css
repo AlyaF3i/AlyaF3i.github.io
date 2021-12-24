@@ -1,6 +1,7 @@
 table#Pageheader th,table#Pageheader td{
     border: 3px solid black;
     padding: 10px;
+    text-align: center;
 }
 table#Pageheader{
     border-spacing: 10px;
@@ -8,4 +9,9 @@ table#Pageheader{
 table#normalTable, table#normalTable th, table#normalTable td{
     border: 2px solid black;
     border-collapse:collapse;
+}
+#Pageheader td:hover{
+    background-color: black;
+    border: 3px solid red;
+    color: white;
 }
