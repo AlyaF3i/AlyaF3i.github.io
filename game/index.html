@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+    </style>
+    <title>Hello</title>
+    <style>
+        #audiobtn{
+            font-size: 30px;
+            border: 1px solid black;
+            width: 40px;
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body onload="startGame()">
+    <script>
+        function audio(){
+            if (document.getElementById('audio').paused){
+                document.getElementById('audiobtn').innerText = "■"/*"&#9654"*/;
+                document.getElementById('audiobtn').style = "background-color: rgb(255, 100, 100);"
+                document.getElementById('audio').play();
+            }else{
+                document.getElementById('audiobtn').innerText = "▶"/*"&#9632"*/;
+                document.getElementById('audiobtn').style = "background-color: rgb(45, 209, 67);"
+                document.getElementById('audio').pause();
+            }
+        }
+        //
+        //Variables
+        //
+        var myGamePiece;
+        var Monsters = [];
+        var score = 0;
+        var loop;
+        var coin;
+        var coins_val = 50;
+        //
+        //
+        //
+        function startGame() {
+            myGameArea.start();
+            myGamePiece = new Character(108, 72, 0, 0,5, 'Character');
+            coin = new Character(36, 54, 300, 0,1, 'Girrafe', true);
+            loop = setInterval(updateGame,50);
+        }
+        
+        var myGameArea = {
+            canvas  : document.createElement("canvas"),
+            start   : function() {
+                this.canvas.id = "MyCanvas";
+                this.canvas.style = "background-image: linear-gradient(to right, seagreen, rgb(152, 214, 179))";
+                this.canvas.width = 1080;
+                this.canvas.height = 720;
+                this.context = this.canvas.getContext("2d");
+                document.body.prepend(this.canvas);
+            },
+            updateScore : function(){
+                this.context.font = "20px Comic Sans MS";
+                this.context.fillStyle = "#303030";
+                this.context.textAlign = "left";
+                this.context.fillText(`Score: ${score}`, this.canvas.width - 200, 50);
+            },
+            clear : function() {
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                this.updateScore();
+            },
+            end : function(){
+                this.clear();
+                document.body.removeEventListener('onkeydown',console.log("You Lost Don't Watch The Logs"));
+                this.context.font = "100px Comic Sans MS";
+                this.context.fillStyle = "red";
+                this.context.textAlign = "center";
+                this.context.fillText("You lost", this.canvas.width/2, this.canvas.height/2-45);
+                this.context.fillText(`Your Score: ${score}`, this.canvas.width/2, this.canvas.height/2+45);
+            }
+        }
+
+        document.body.addEventListener('keypress', event => {
+            let key = event.key.toLowerCase();
+            if (key === 'w'){
+                myGamePiece.update('up');
+            } else if (key === 's'){
+                myGamePiece.update('down');
+            }else if (key === 'd'){
+                myGamePiece.update('right');
+            }else if (key === 'a'){
+                myGamePiece.update('left');
+            }
+        });
+
+        function Character(width, height, x, y, speed, img_name, looks_same = false) {
+            this.spong = new Image();
+            this.img_name = img_name;
+            this.looks_same = looks_same;
+            this.spong.src = this.looks_same?`img/${this.img_name}.png`:`img/${img_name}Right.png`;
+            this.width = width;
+            this.height = height;
+            this.x = x;
+            this.y = y;
+            this.speed = speed;
+            myGameArea.context.drawImage(this.spong,this.x,this.y,this.width,this.height);
+            this.UpdateXY = function(x,y){
+                if (x + this.width > myGameArea.width)
+                    x = myGameArea.width - this.width;
+                else if (x < 0)
+                    x = 0;
+                if (y + this.height > myGameArea.height)
+                    y = myGameArea.height - this.height;
+                else if (y < 0)
+                    y = 0;
+                this.x = x;
+                this.y = y
+            }
+            this.right = function(){
+                this.spong.src = this.looks_same?`img/${this.img_name}.png`:`img/${this.img_name}Right.png`;
+                if (this.width < this.height){
+                    let temp = this.width;
+                    this.width = this.height;
+                    this.height = temp;
+                }
+                this.UpdateXY(this.x + this.speed, this.y);
+            }
+            this.left = function(){
+
+                this.spong.src = this.looks_same?`img/${this.img_name}.png`:`img/${this.img_name}Left.png`;
+                if (this.width < this.height){
+                    let temp = this.width;
+                    this.width = this.height;
+                    this.height = temp;
+                }
+                this.UpdateXY(this.x - this.speed, this.y);
+            }
+            this.up = function(){
+                this.spong.src = this.looks_same?`img/${this.img_name}.png`:`img/${this.img_name}Up.png`;
+                if (this.width > this.height){
+                    let temp = this.width;
+                    this.width = this.height;
+                    this.height = temp;
+                }
+                this.UpdateXY(this.x, this.y - this.speed);
+            }
+            this.down = function(){
+                this.spong.src = this.looks_same?`img/${this.img_name}.png`:`img/${this.img_name}Down.png`;
+                if (this.width > this.height){
+                    let temp = this.width;
+                    this.width = this.height;
+                    this.height = temp;
+                }
+                this.UpdateXY(this.x, this.y + this.speed);
+            }
+            this.update = function(way){
+                switch (way){
+                    case "right":
+                        this.right();
+                        break;
+                    case "left":
+                        this.left();
+                        break;
+                    case "up":
+                        this.up();
+                        break;
+                    case "down":
+                        this.down();
+                }
+            }
+            this.draw = function (){
+                myGameArea.context.drawImage(this.spong,this.x,this.y,this.width,this.height);
+            }
+            this.updateMonster = (output) => {
+                if(output[0]===-1){
+                    this.left();
+                }else if (output[0] === 1){
+                    this.right();
+                }else{}
+                if(output[1] === 1){
+                    this.down();
+                }else if (output[1] === -1){
+                    this.up();
+                }
+            }
+            this.isCollapse = function(){
+                let myleft = this.x;
+                let myright = this.x + (this.width);
+                let mytop = this.y;
+                let mybottom = this.y + (this.height);
+                let otherleft = myGamePiece.x;
+                let otherright = myGamePiece.x + (myGamePiece.width);
+                let othertop = myGamePiece.y;
+                let otherbottom = myGamePiece.y + (myGamePiece.height);
+                if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+                    return false;
+                }
+                return true;
+            }
+        }
+        
+        function newMonster(){
+            if (Monsters.length > 10)
+                return ;
+            let x = Math.floor(Math.random() * myGameArea.width);
+            let y = Math.floor(Math.random() * myGameArea.height);
+            let i = Math.round(Math.random());
+            var temp = new Character(i===0?108:50, i===0?72:50, x, y, Math.floor((Math.random()+(1/(myGamePiece.speed-2))) * (myGamePiece.speed-2) ), ['Monster','Ghost'][i], i === 1);
+            while (temp.isCollapse() || (temp.x + temp.width) > myGameArea.canvas.width || (temp.y + temp.height) > myGameArea.canvas.height)
+            {
+                temp.x = Math.floor(Math.random() * myGameArea.canvas.width);
+                temp.y = Math.floor(Math.random() * myGameArea.canvas.height);
+            }
+            Monsters.push(temp);
+        }
+        function AddOrNot(){
+            let a = score / (coins_val * 2);
+            return a > Monsters.length;
+        }
+        function newThing(){
+            /*let x = Math.floor(Math.random() * myGameArea.width);
+            let y = Math.floor(Math.random() * myGameArea.height);
+            let temp = new Character(108, 72, x, y, Math.floor(Math.random() * myGamePiece.speed), 'Girrafe',true);*/
+            while (coin.isCollapse() ||
+             (coin.x + coin.width) > myGameArea.canvas.width || 
+             (coin.y + coin.height) > myGameArea.canvas.height
+            )
+            {
+                coin.x = Math.floor(Math.random() * myGameArea.canvas.width);
+                coin.y = Math.floor(Math.random() * myGameArea.canvas.height);
+            }
+            //coin = temp;
+        }
+
+        function follow(monster){
+            let speed = monster.speed;
+            let targetX = myGamePiece.x;
+            let targetY = myGamePiece.y;
+            let output = [1,1];
+            if (monster.x > targetX)
+                output[0] = -1
+            else if (monster.x === targetX)
+                output[0] = 0;
+            if (monster.y > targetY)
+                output[1] = -1;
+            else if (monster.y === targetY)
+                output[1] = 0;
+
+            monster.updateMonster(output);
+            }
+        
+        
+        
+        document.body.addEventListener('onkeydown', event =>{
+            let key = event.key.toLowerCase();
+            switch(key){
+                case "arrowdown":
+                    this.update('down');
+                    break;
+                case "arrowup":
+                    this.update('up');
+                    break;
+                case "arrowleft":
+                    this.update('left');
+                    break;
+                case "arrowright":
+                    this.update('right');
+            }
+
+        });
+        function updateGame(){
+            myGameArea.clear();
+            coin.draw();
+            myGamePiece.draw();
+            Monsters.forEach(Monster =>{
+                follow(Monster);
+                Monster.draw(); 
+                if(Monster.isCollapse()){
+                    //clearInterval(loop);
+                    console.log('done');
+                    myGameArea.end();
+                }
+            });
+            if (AddOrNot())
+                newMonster();
+            if (coin.isCollapse()){
+                score += coins_val;
+                console.log('I ate it');
+                newThing();
+            }
+        }
+
+    </script>
+    <audio id="audio" loop>
+        <source src="audio/Alan.mp3" type="audio/mpeg">
+        <source src="audio/LaFama.mp3" type="audio/mpeg">
+    </audio>
+        <div id = "audiobtn" onclick="audio()" style="background-color: rgb(45, 209, 67);">&#9654</div>
+</body>
+</html>
