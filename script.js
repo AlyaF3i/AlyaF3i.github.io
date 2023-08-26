@@ -180,6 +180,7 @@ function filterEquation(equ){
     equ=equ.replace("^","**");
     return equ;
 }
+
 function Change(){
     let courses=document.forms[0].elements['CoursesNum'].value;
     Hide();
