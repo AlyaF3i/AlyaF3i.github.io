@@ -194,21 +194,52 @@ function Hide(){
         document.getElementById(n).style.visibility="hidden";
     }
 }
-function Calc(){
-    let courses=document.forms[0].elements['CoursesNum'].value*1;
-    console.log(courses);
-    sum=0;
-    hours=0;
-    for(let i=1;i<=courses;i++){
-        let n="m"+i;
-        let temp=(document.forms[0].elements[n].value*1.0);
-        console.log(`${temp}`);
-        n="w"+i;
-        let a=(temp*document.forms[0].elements[n].value);
-        //console.log(`${a}`);
-        sum+=a;
-        hours+=(document.forms[0].elements[n].value*1.0);
+
+
+function addCourse() {
+    const courseList = document.getElementById("courseList");
+    const courseNumber = courseList.children.length + 1;
+
+    const courseRow = document.createElement("tr");
+    courseRow.innerHTML = `
+        <td>Course #${courseNumber}</td>
+        <td>
+            <select name="m${courseNumber}" id="${courseNumber}">
+                <option value="4">A</option>
+                <option value="3.5">B+</option>
+                <option value="3">B</option>
+                <option value="2.5">C+</option>
+                <option value="2">C</option>
+                <option value="1.5">D+</option>
+                <option value="1">D</option>
+                <option value="0">F</option>
+            </select>
+        </td>
+        <td><input type="number" name="w${courseNumber}" max="4" min="0" step="1" value="3"></td>
+    `;
+
+    courseList.appendChild(courseRow);
+}
+
+function calculateGPA() {
+    const courseInputs = document.forms[0].elements;
+    let sum = 0;
+    let totalWeight = 0;
+
+    for (let i = 0; i < courseInputs.length; i += 2) {
+        const mark = parseFloat(courseInputs[i].value);
+        const weight = parseFloat(courseInputs[i + 1].value);
+
+        if (!isNaN(mark) && !isNaN(weight)) {
+            sum += mark * weight;
+            totalWeight += weight;
+        }
     }
-    let GPA=sum/hours;
-    document.getElementById("output").innerHTML="  Your GPA is:  "+GPA;
+
+    if (totalWeight === 0) {
+        document.getElementById("gpaOutput").textContent = "Please enter valid data.";
+    } else {
+        const GPA = sum / totalWeight;
+        document.getElementById("gpaOutput").textContent = "Your GPA is: " + GPA.toFixed(2);
+    }
 }

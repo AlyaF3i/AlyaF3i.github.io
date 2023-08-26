@@ -1,17 +1,82 @@
-table#Pageheader th,table#Pageheader td{
-    border: 3px solid black;
+body {
+    background-color: #111;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#Pageheader {
+    background-color: #333;
     padding: 10px;
     text-align: center;
 }
-table#Pageheader{
-    border-spacing: 10px;
+
+#Pageheader td {
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
 }
-table#normalTable, table#normalTable th, table#normalTable td{
-    border: 2px solid black;
-    border-collapse:collapse;
+
+#Pageheader td:hover {
+    background-color: #555;
 }
-#Pageheader td:hover{
-    background-color: black;
-    border: 3px solid red;
-    color: white;
+
+form {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #222;
+    border-radius: 10px;
+}
+
+table {
+    width: 100%;
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #444;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #444;
+}
+
+td input, select {
+    width: 100%;
+    padding: 5px;
+    background-color: #333;
+    border: none;
+    color: #fff;
+}
+
+caption {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+h1#output {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 24px;
 }

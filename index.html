@@ -1,19 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlyaF3i</title>
-    <script>
-    </script>
-    <style>
-        input{
-            border:0px solid black;
-            border-radius: 10%;
-        }
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="script.js"></script>
 
-
-    </style>
-    <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
     <table id="Pageheader">
@@ -25,133 +18,46 @@
         <tr>
             <td onclick="window.location.href='Calculator/index.html'">Tempe & Len</td>
             <td onclick="window.location.href='game/index.html'">Game</td>
+            <td onclick="window.location.href='MFadel.html'">M Fadel</td>
         </tr>
     </table>
 
     <form method="post" onsubmit="return false">
-        <caption><b>How Many Courses:</b> <input style="border:1px solid gray;" name="CoursesNum" type="number" max="7" min="1" step="1" value="1" onchange="Change()"></caption>
+
         <table id="normalTable">
-                <tr id="row0">
+            <thead>
+                <tr>
                     <th>#</th>
                     <th>Mark</th>
                     <th>Weight</th>
                 </tr>
-            <tr id="row1">
-                <td>Course #1</td>
-                <td>
-                <select name="m1" id="1">
-                    <option value="4">A</option>
-                    <option value="3.5">B+</option>
-                    <option value="3">B</option>
-                    <option value="2.5">C+</option>
-                    <option value="2">C</option>
-                    <option value="1.5">D+</option>
-                    <option value="1">D</option>
-                    <option value="0">F</option>
-                </select>
-                </td>
-                <td><input type="number" name="w1" max="4" min="0" step="1" value=3></td>
-            </tr>
-            <tr id="row2">
-                <td>Course #2</td>
-                <td>
-                <select name="m2" id="2">
-                    <option value="4">A</option>
-                    <option value="3.5">B+</option>
-                    <option value="3">B</option>
-                    <option value="2.5">C+</option>
-                    <option value="2">C</option>
-                    <option value="1.5">D+</option>
-                    <option value="1">D</option>
-                    <option value="0">F</option>
-                </select>
-            </td>
-            <td><input type="number" name="w2" max="4" min="0" step="1" value=3></td>
-            </tr>
-            <tr id="row3">
-                <td>Course #3</td>
-                <td>
-                <select name="m3" id="3">
-                    <option value="4">A</option>
-                    <option value="3.5">B+</option>
-                    <option value="3">B</option>
-                    <option value="2.5">C+</option>
-                    <option value="2">C</option>
-                    <option value="1.5">D+</option>
-                    <option value="1">D</option>
-                    <option value="0">F</option>
-                </select>
-            </td>
-            <td><input type="number" name="w3" max="4" min="0" step="1" value=3></td>
-            </tr>
-            <tr id="row4">
-                <td>Course #4</td>
-                <td>
-                <select name="m4" id="4">
-                    <option value="4">A</option>
-                    <option value="3.5">B+</option>
-                    <option value="3">B</option>
-                    <option value="2.5">C+</option>
-                    <option value="2">C</option>
-                    <option value="1.5">D+</option>
-                    <option value="1">D</option>
-                    <option value="0">F</option>
-                </select>
-            </td>
-            <td><input type="number" name="w4" max="4" min="0" step="1" value=3></td>
-            </tr>
-            <tr id="row5">
-                <td>Course #5</td>
-                <td>
-                <select name="m5" id="5">
-                    <option value="4">A</option>
-                    <option value="3.5">B+</option>
-                    <option value="3">B</option>
-                    <option value="2.5">C+</option>
-                    <option value="2">C</option>
-                    <option value="1.5">D+</option>
-                    <option value="1">D</option>
-                    <option value="0">F</option>
-                </select>
-            </td>
-            <td><input type="number" name="w5" max="4" min="0" step="1" value=3></td>
-            </tr>
-            <tr id="row6">
-                <td>Course #6</td>
-                <td>
-                <select name="m6" id="6">
-                    <option value="4">A</option>
-                    <option value="3.5">B+</option>
-                    <option value="3">B</option>
-                    <option value="2.5">C+</option>
-                    <option value="2">C</option>
-                    <option value="1.5">D+</option>
-                    <option value="1">D</option>
-                    <option value="0">F</option>
-                </select>
-            </td>
-            <td><input type="number" name="w6" max="4" min="0" step="1" value=3></td>
-            </tr>
-            <tr id="row7">
-                <td>Course #7</td>
-                <td>
-                <select name="m7" id="7">
-                    <option value="4">A</option>
-                    <option value="3.5">B+</option>
-                    <option value="3">B</option>
-                    <option value="2.5">C+</option>
-                    <option value="2">C</option>
-                    <option value="1.5">D+</option>
-                    <option value="1">D</option>
-                    <option value="0">F</option>
-                </select>
-            </td>
-            <td><input type="number" name="w7" max="4" min="0" step="1" value=3></td>
-            </tr>
+            </thead>
+            <tbody id="courseList">
+                <!-- Existing course rows will go here -->
+                <tr>
+                    <td>Course #1</td>
+                    <td>
+                        <select name="m1" id="1">
+                            <option value="4">A</option>
+                            <option value="3.5">B+</option>
+                            <option value="3">B</option>
+                            <option value="2.5">C+</option>
+                            <option value="2">C</option>
+                            <option value="1.5">D+</option>
+                            <option value="1">D</option>
+                            <option value="0">F</option>
+                        </select>
+                    </td>
+                    <td><input type="number" name="w1" max="4" min="0" step="1" value="3"></td>
+                </tr>
+            </tbody>
         </table>
         <br>
-        <button onclick="Calc()">Calculate</button>
+        <button onclick="addCourse()">Add Course</button>
+        <button onclick="calculateGPA()">Calculate</button>
+        <h2 id="gpaOutput"></h2>
     </form>
-    <h1 id="output"></h1>
+    
+
 </body>
 </html>
