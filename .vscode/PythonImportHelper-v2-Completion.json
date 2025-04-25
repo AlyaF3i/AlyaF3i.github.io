@@ -1,0 +1,29 @@
+[
+    {
+        "label": "pytube",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pytube",
+        "description": "pytube",
+        "detail": "pytube",
+        "documentation": {}
+    },
+    {
+        "label": "toHex",
+        "kind": 2,
+        "importPath": "Calculator.python",
+        "description": "Calculator.python",
+        "peekOfCode": "def toHex(x):\n    a=[hex(b)[2:].zfill(2) for b in x]\n    b=\"#\"\n    for d in a:\n        b+=d\n    print(b)\ntoHex((240,  73, 118))",
+        "detail": "Calculator.python",
+        "documentation": {}
+    },
+    {
+        "label": "video",
+        "kind": 5,
+        "importPath": "game.script",
+        "description": "game.script",
+        "peekOfCode": "video = yt.YouTube('https://www.youtube.com/watch?v=dhYOPzcsbGM').streams.get_by_itag(139).download()\n[print(a) for a in video]",
+        "detail": "game.script",
+        "documentation": {}
+    }
+]
