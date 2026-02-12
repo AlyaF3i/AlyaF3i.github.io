@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlyaF3i</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="script.js"></script>
+
+</head>
+<body>
+    <table id="Pageheader">
+        <tr>
+            <td onclick="window.location.href='RK4.html'">RK4</td>
+            <td onclick="window.location.href='CH7.html'">Ch7</td>
+            <td onclick="window.location.href='Calc.html'">Stat</td>
+        </tr>
+        <tr>
+            <td onclick="window.location.href='Calculator/index.html'">Tempe & Len</td>
+            <td onclick="window.location.href='game/index.html'">Game</td>
+            <td onclick="window.location.href='MFadel.html'">M Fadel</td>
+        </tr>
+    </table>
+
+    <form method="post" onsubmit="return false">
+
+        <table id="normalTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Mark</th>
+                    <th>Weight</th>
+                </tr>
+            </thead>
+            <tbody id="courseList">
+                <!-- Existing course rows will go here -->
+                <tr>
+                    <td>Course #1</td>
+                    <td>
+                        <select name="m1" id="1">
+                            <option value="4">A</option>
+                            <option value="3.5">B+</option>
+                            <option value="3">B</option>
+                            <option value="2.5">C+</option>
+                            <option value="2">C</option>
+                            <option value="1.5">D+</option>
+                            <option value="1">D</option>
+                            <option value="0">F</option>
+                        </select>
+                    </td>
+                    <td><input type="number" name="w1" max="4" min="0" step="1" value="3"></td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <button onclick="addCourse()">Add Course</button>
+        <button onclick="calculateGPA()">Calculate</button>
+        <h2 id="gpaOutput"></h2>
+    </form>
+    
+
+</body>
+</html>

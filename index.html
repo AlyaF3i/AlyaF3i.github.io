@@ -1,63 +1,600 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlyaF3i</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <script src="script.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohammed Alyafeai | Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Cormorant+Garamond:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #070d1a;
+      --panel: rgba(10, 19, 38, 0.7);
+      --panel-strong: rgba(10, 19, 38, 0.92);
+      --text: #e7f0ff;
+      --muted: #9fb2d8;
+      --line: rgba(143, 177, 255, 0.28);
+      --accent: #4ecdc4;
+      --accent-2: #5ea4ff;
+      --accent-3: #f9c86d;
+      --shadow: 0 22px 45px rgba(0, 0, 0, 0.35);
+      --radius: 18px;
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Sora", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 10% 15%, rgba(78, 205, 196, 0.2), transparent 34%),
+        radial-gradient(circle at 88% 12%, rgba(94, 164, 255, 0.26), transparent 37%),
+        radial-gradient(circle at 44% 84%, rgba(249, 200, 109, 0.17), transparent 30%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(8px);
+      opacity: 0.35;
+      animation: float 14s ease-in-out infinite;
+    }
+
+    .orb.one {
+      width: 280px;
+      height: 280px;
+      background: linear-gradient(140deg, var(--accent), transparent);
+      left: -80px;
+      top: 180px;
+    }
+
+    .orb.two {
+      width: 320px;
+      height: 320px;
+      background: linear-gradient(140deg, var(--accent-2), transparent);
+      right: -110px;
+      top: 300px;
+      animation-delay: -4s;
+    }
+
+    .orb.three {
+      width: 220px;
+      height: 220px;
+      background: linear-gradient(160deg, var(--accent-3), transparent);
+      left: 38%;
+      bottom: -70px;
+      animation-delay: -7s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) translateX(0px); }
+      50% { transform: translateY(-22px) translateX(15px); }
+    }
+
+    .wrapper {
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+      padding: 36px 0 70px;
+    }
+
+    .hero {
+      position: relative;
+      padding: 42px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, rgba(94, 164, 255, 0.2), rgba(78, 205, 196, 0.08));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transform-style: preserve-3d;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -50% 40% 25% -15%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.17), transparent 52%);
+      transform: rotate(10deg);
+    }
+
+    .hero h1 {
+      position: relative;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 1.15;
+      letter-spacing: 0.4px;
+      margin-bottom: 6px;
+      font-family: "Cormorant Garamond", serif;
+    }
+
+    .hero h2 {
+      position: relative;
+      font-weight: 600;
+      color: var(--accent);
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      position: relative;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+      position: relative;
+    }
+
+    .chip {
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--line);
+      background: rgba(9, 16, 32, 0.56);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.86rem;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .chip:hover {
+      transform: translateY(-2px);
+      border-color: rgba(78, 205, 196, 0.7);
+      background: rgba(78, 205, 196, 0.1);
+    }
+
+    .btn-row {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      position: relative;
+    }
+
+    .btn {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 165px;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .btn.primary {
+      color: #072728;
+      background: linear-gradient(130deg, #74f2dc, var(--accent));
+    }
+
+    .btn.secondary {
+      color: #cce9ff;
+      border: 1px solid var(--line);
+      background: rgba(9, 16, 32, 0.55);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+    }
+
+    .stats {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      position: relative;
+    }
+
+    .stat {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .stat strong {
+      font-size: 1.3rem;
+      color: var(--accent);
+      display: block;
+    }
+
+    .stat span {
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+
+    main {
+      margin-top: 26px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .section {
+      background: var(--panel-strong);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .section h3 {
+      font-size: 1.1rem;
+      margin-bottom: 14px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--accent-2);
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+    }
+
+    .role {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 15px;
+      background: rgba(12, 22, 43, 0.7);
+    }
+
+    .role-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .role h4 {
+      font-size: 1rem;
+    }
+
+    .meta {
+      color: var(--accent-3);
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
+
+    .role ul {
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 0.89rem;
+      display: grid;
+      gap: 4px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(13, 23, 44, 0.65);
+      padding: 14px;
+    }
+
+    .card h4 {
+      font-size: 0.96rem;
+      margin-bottom: 6px;
+      color: #d8e7ff;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .skills .card ul {
+      color: var(--muted);
+      padding-left: 16px;
+      font-size: 0.86rem;
+      display: grid;
+      gap: 3px;
+    }
+
+    .pubs {
+      display: grid;
+      gap: 10px;
+      font-size: 0.87rem;
+      color: var(--muted);
+    }
+
+    .pubs a {
+      color: #9cdffb;
+      text-decoration: none;
+    }
+
+    .pubs a:hover {
+      text-decoration: underline;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px) scale(0.985);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 900px) {
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .cards, .skills { grid-template-columns: 1fr; }
+      .hero { padding: 28px 20px; }
+      .section { padding: 20px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .orb,
+      .reveal,
+      .hero,
+      .btn,
+      .chip { animation: none !important; transition: none !important; transform: none !important; }
+      .reveal { opacity: 1; }
+    }
+  </style>
 </head>
 <body>
-    <table id="Pageheader">
-        <tr>
-            <td onclick="window.location.href='RK4.html'">RK4</td>
-            <td onclick="window.location.href='CH7.html'">Ch7</td>
-            <td onclick="window.location.href='Calc.html'">Stat</td>
-        </tr>
-        <tr>
-            <td onclick="window.location.href='Calculator/index.html'">Tempe & Len</td>
-            <td onclick="window.location.href='game/index.html'">Game</td>
-            <td onclick="window.location.href='MFadel.html'">M Fadel</td>
-        </tr>
-    </table>
+  <div class="backdrop" aria-hidden="true">
+    <span class="orb one"></span>
+    <span class="orb two"></span>
+    <span class="orb three"></span>
+  </div>
 
-    <form method="post" onsubmit="return false">
+  <div class="wrapper">
+    <header class="hero reveal" id="hero">
+      <h1>Mohammed Alyafeai</h1>
+      <h2>Applied AI Researcher and Engineer</h2>
+      <p>
+        Research-focused AI practitioner specializing in Arabic large language models (LLMs), model fine-tuning,
+        and production-grade GenAI systems. Strong track record in end-to-end ownership from research experimentation
+        to scalable tooling, evaluation, and deployment.
+      </p>
 
-        <table id="normalTable">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Mark</th>
-                    <th>Weight</th>
-                </tr>
-            </thead>
-            <tbody id="courseList">
-                <!-- Existing course rows will go here -->
-                <tr>
-                    <td>Course #1</td>
-                    <td>
-                        <select name="m1" id="1">
-                            <option value="4">A</option>
-                            <option value="3.5">B+</option>
-                            <option value="3">B</option>
-                            <option value="2.5">C+</option>
-                            <option value="2">C</option>
-                            <option value="1.5">D+</option>
-                            <option value="1">D</option>
-                            <option value="0">F</option>
-                        </select>
-                    </td>
-                    <td><input type="number" name="w1" max="4" min="0" step="1" value="3"></td>
-                </tr>
-            </tbody>
-        </table>
-        <br>
-        <button onclick="addCourse()">Add Course</button>
-        <button onclick="calculateGPA()">Calculate</button>
-        <h2 id="gpaOutput"></h2>
-    </form>
-    
+      <div class="chip-row">
+        <a class="chip" href="mailto:Alyaf3i1118@gmail.com">Alyaf3i1118@gmail.com</a>
+        <a class="chip" href="tel:+971503259118">+971 50 325 9118</a>
+        <a class="chip" href="https://www.linkedin.com/in/mohammed-alyafeai/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a class="chip" href="https://github.com/AlyaF3i" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
 
+      <div class="btn-row">
+        <a class="btn primary" href="../Mohammed%20Alyafeai%20resume.pdf" target="_blank" rel="noreferrer">Open Resume PDF</a>
+        <a class="btn secondary" href="../index.html">Back To Home</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <strong data-count="4">0+</strong>
+          <span>Years Experience</span>
+        </div>
+        <div class="stat">
+          <strong data-count="7">0+</strong>
+          <span>Publications</span>
+        </div>
+        <div class="stat">
+          <strong data-count="3">0</strong>
+          <span>Core Roles</span>
+        </div>
+        <div class="stat">
+          <strong data-count="2026">0</strong>
+          <span>Latest Milestone</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section reveal">
+        <h3>Experience</h3>
+        <div class="timeline">
+          <article class="role">
+            <div class="role-head">
+              <h4>Senior Associate AI Engineer - TII (Abu Dhabi, UAE)</h4>
+              <span class="meta">Dec 2023 - Present</span>
+            </div>
+            <ul>
+              <li>Led a tool-calling project with a robust, scalable pipeline and strong internal results.</li>
+              <li>Co-developed Falcon-Arabic, a state-of-the-art Arabic LLM in its size category.</li>
+              <li>Built a private state-of-the-art Arabic translation model and fine-tuned LLMs for structured outputs.</li>
+              <li>Designed GenAI tooling: RAG pipelines, web search integration, crawlers, and automated evaluations.</li>
+              <li>Built cloud automation including Lambda workflows and storage cleanup scripts saving over $5K daily.</li>
+            </ul>
+          </article>
+
+          <article class="role">
+            <div class="role-head">
+              <h4>AI/ML and Backend Engineer - Aixplain (California, US, Remote)</h4>
+              <span class="meta">Feb 2023 - Feb 2024</span>
+            </div>
+            <ul>
+              <li>Integrated ML models with KServe and exposed scalable inference APIs.</li>
+              <li>Containerized synchronous and asynchronous pipelines and deployed services on Kubernetes.</li>
+              <li>Built retrieval backends with Qdrant and automated onboarding with CI/CD via GitHub Actions.</li>
+              <li>Owned major repository features, contributed code reviews, testing, and Sphinx documentation automation.</li>
+            </ul>
+          </article>
+
+          <article class="role">
+            <div class="role-head">
+              <h4>Data Analyst and Software Engineer - Cyber Gate Defense (Abu Dhabi, UAE)</h4>
+              <span class="meta">Sep 2021 - Mar 2023</span>
+            </div>
+            <ul>
+              <li>Automated data ingestion from SIEM systems and built analytics pipelines.</li>
+              <li>Developed ML, deep learning, and NLP models for security and monitoring use cases.</li>
+              <li>Managed Elasticsearch data flow via Logstash and delivered dashboards through Kibana and Power BI.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <h3>Projects</h3>
+        <div class="cards">
+          <article class="card"><h4>Falcon-Arabic</h4><p>Co-developed a state-of-the-art Arabic LLM in its size category.</p></article>
+          <article class="card"><h4>Tool-Calling System</h4><p>Owned development of an unreleased tool-calling pipeline with strong benchmark results.</p></article>
+          <article class="card"><h4>Private Arabic Translation Model</h4><p>Sole developer of a private SOTA translation model focused on Arabic.</p></article>
+          <article class="card"><h4>AutoAuditor</h4><p>Web app that leverages LLMs for automated security auditing.</p></article>
+          <article class="card"><h4>Chatbot Generator</h4><p>Platform enabling users to build chatbots with API access and vector retrieval.</p></article>
+          <article class="card"><h4>Arabic Diacritization Model</h4><p>Built and fine-tuned a UAE dialect diacritization model; won first place in Sibaq Lahja.</p></article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <h3>Skills</h3>
+        <div class="skills">
+          <article class="card">
+            <h4>Core Strengths</h4>
+            <ul>
+              <li>Research leadership and initiative</li>
+              <li>Creative problem-solving</li>
+              <li>Fast learning and execution</li>
+              <li>Team collaboration</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h4>AI and Data</h4>
+            <ul>
+              <li>LLM training, fine-tuning, evaluation</li>
+              <li>PyTorch, scikit-learn, NumPy, pandas</li>
+              <li>Data synthesis and augmentation</li>
+              <li>RAG systems and retrieval workflows</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h4>Engineering Stack</h4>
+            <ul>
+              <li>Python, C, Django, Flask, Pytest</li>
+              <li>Kubernetes, Docker, AWS S3/ECR, GCP</li>
+              <li>Elasticsearch, MongoDB, Qdrant</li>
+              <li>CI/CD with GitHub Actions</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <h3>Education</h3>
+        <p class="lead">
+          Al Ain University - Abu Dhabi Campus<br />
+          Bachelor in Software Engineering (2018 - 2021), GPA: 3.91 (Honored)
+        </p>
+      </section>
+
+      <section class="section reveal">
+        <h3>Publications</h3>
+        <div class="pubs">
+          <p>An Intelligent Route Finder for UAE Desert Drivers Based on the A* Algorithm (IOTSMS 2021) - <a href="https://doi.org/10.1109/IOTSMS53705.2021.9704931" target="_blank" rel="noreferrer">DOI</a></p>
+          <p>Gulf Arabic Diacritization: Guidelines, Initial Dataset, and Results (WANLP 2022) - <a href="https://doi.org/10.18653/v1/2022.wanlp-1.33" target="_blank" rel="noreferrer">DOI</a></p>
+          <p>Enhancing Intrusion Detection Systems Accuracy Using Machine Learning (SDS 2023) - <a href="https://doi.org/10.1109/SDS59856.2023.10329276" target="_blank" rel="noreferrer">DOI</a></p>
+          <p>Falcon2-11B Technical Report (arXiv 2024) - <a href="https://arxiv.org/abs/2407.14885" target="_blank" rel="noreferrer">arXiv</a></p>
+          <p>Adapting Falcon3-7B Language Model for Arabic: Methods, Challenges, and Outcomes (ArabicNLP 2025).</p>
+          <p>3LM: Bridging Arabic, STEM, and Code through Benchmarking (ArabicNLP 2025).</p>
+          <p>Evaluating Arabic Large Language Models: A Survey of Benchmarks, Methods, and Gaps.</p>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <h3>Certificates and Achievements</h3>
+        <div class="cards">
+          <article class="card"><h4>Release Falcon H1 Arabic (Jan 2026)</h4><p>Primary contributor after the lead, responsible for end-to-end continuous pre-training.</p></article>
+          <article class="card"><h4>Release Falcon Arabic (May 2025)</h4><p>Primary contributor after the lead across data preparation, tokenization, and evaluation-driven refinement.</p></article>
+          <article class="card"><h4>WeCloud AI Course (Oct 2024)</h4><p>Focused on preprocessing data and training/fine-tuning LLMs.</p></article>
+          <article class="card"><h4>Project Management Simplified (Aug 2024)</h4><p>Certificate covering 12 steps for successful project completion.</p></article>
+          <article class="card"><h4>Project Management Foundation (Jul 2024)</h4><p>End-to-end project management concepts from a strategic view.</p></article>
+          <article class="card"><h4>Won Sibaq Lahja Program (Oct 2022)</h4><p>First place for building a model that diacritizes Gulf Arabic text.</p></article>
+        </div>
+      </section>
+    </main>
+
+    <footer>Languages: Arabic (native) and English (fluent)</footer>
+  </div>
+
+  <script>
+    const revealElements = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18 });
+    revealElements.forEach((el) => observer.observe(el));
+
+    const counters = document.querySelectorAll('[data-count]');
+    counters.forEach((counter) => {
+      const target = Number(counter.getAttribute('data-count'));
+      const duration = 1200;
+      const startTime = performance.now();
+
+      const tick = (now) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const current = Math.floor(progress * target);
+        counter.textContent = `${current}${target < 2000 ? '+' : ''}`;
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          counter.textContent = `${target}${target < 2000 ? '+' : ''}`;
+        }
+      };
+      requestAnimationFrame(tick);
+    });
+
+    const hero = document.getElementById('hero');
+    window.addEventListener('mousemove', (event) => {
+      const x = (event.clientX / window.innerWidth - 0.5) * 8;
+      const y = (event.clientY / window.innerHeight - 0.5) * -8;
+      hero.style.transform = `perspective(1000px) rotateX(${y}deg) rotateY(${x}deg)`;
+    });
+  </script>
 </body>
 </html>
