@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Score Helper</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f7f2e9;
+      --bg-strong: #fffaf1;
+      --panel: rgba(255, 250, 241, 0.88);
+      --panel-strong: rgba(255, 250, 241, 0.96);
+      --text: #1f2933;
+      --muted: #586574;
+      --line: rgba(31, 41, 51, 0.12);
+      --accent: #0f9d8a;
+      --accent-deep: #0a6f63;
+      --accent-soft: rgba(15, 157, 138, 0.12);
+      --highlight: #f29f67;
+      --shadow: 0 24px 60px rgba(78, 57, 31, 0.14);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Space Grotesk", "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(242, 159, 103, 0.24), transparent 32%),
+        radial-gradient(circle at right 12% top 14%, rgba(15, 157, 138, 0.18), transparent 28%),
+        linear-gradient(180deg, #fbf6ef 0%, var(--bg) 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(31, 41, 51, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31, 41, 51, 0.035) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.65), transparent 92%);
+    }
+
+    .page {
+      width: min(1100px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(255, 245, 228, 0.95)),
+        var(--bg-strong);
+      border: 1px solid rgba(31, 41, 51, 0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -70px;
+      top: -80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(15, 157, 138, 0.18), transparent 64%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(15, 157, 138, 0.1);
+      color: var(--accent-deep);
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    h1 {
+      margin: 18px 0 12px;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(2.2rem, 4.8vw, 4.1rem);
+      line-height: 0.98;
+      max-width: 640px;
+    }
+
+    .lead {
+      max-width: 700px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .hero-note {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .note {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(31, 41, 51, 0.08);
+      font-size: 0.9rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .page > .hero {
+      margin-top: 26px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid rgba(31, 41, 51, 0.08);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .builder {
+      padding: 24px;
+    }
+
+    .panel-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .panel-title h2,
+    .results h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      letter-spacing: 0.01em;
+    }
+
+    .panel-title p,
+    .results p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn {
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-weight: 700;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #1cc3ad);
+      color: #ffffff;
+      box-shadow: 0 16px 30px rgba(15, 157, 138, 0.18);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--text);
+      border: 1px solid rgba(31, 41, 51, 0.1);
+    }
+
+    .score-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .score-card {
+      padding: 16px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid rgba(31, 41, 51, 0.08);
+      display: grid;
+      gap: 14px;
+    }
+
+    .score-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .score-label {
+      font-weight: 700;
+      font-size: 0.98rem;
+    }
+
+    .score-percent {
+      min-width: 92px;
+      text-align: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-deep);
+      font-weight: 700;
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) auto;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field label {
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .field input {
+      width: 100%;
+      border: 1px solid rgba(31, 41, 51, 0.12);
+      border-radius: 14px;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--text);
+      font: inherit;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .field input:focus {
+      border-color: rgba(15, 157, 138, 0.55);
+      box-shadow: 0 0 0 4px rgba(15, 157, 138, 0.12);
+    }
+
+    .mini-btn {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(31, 41, 51, 0.06);
+      color: var(--text);
+      min-width: 88px;
+    }
+
+    .results {
+      padding: 24px;
+      background: var(--panel-strong);
+    }
+
+    .stats {
+      margin: 20px 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .stat {
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid rgba(31, 41, 51, 0.08);
+    }
+
+    .stat span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.84rem;
+      margin-bottom: 8px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      line-height: 1.08;
+    }
+
+    .output-wrap {
+      display: grid;
+      gap: 12px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 220px;
+      resize: vertical;
+      border: 1px solid rgba(31, 41, 51, 0.12);
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text);
+      font: inherit;
+      line-height: 1.55;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: rgba(15, 157, 138, 0.55);
+      box-shadow: 0 0 0 4px rgba(15, 157, 138, 0.12);
+    }
+
+    .copy-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .status {
+      min-height: 24px;
+      margin-top: 12px;
+      color: var(--accent-deep);
+      font-weight: 700;
+    }
+
+    .footer-note {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 920px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: min(100vw - 20px, 1100px);
+        padding-top: 20px;
+        padding-bottom: 30px;
+      }
+
+      .hero,
+      .builder,
+      .results {
+        padding: 20px;
+      }
+
+      .score-grid,
+      .copy-row,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .panel-title,
+      .score-top {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .actions {
+        width: 100%;
+      }
+
+      .actions .btn {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="layout">
+      <div class="panel builder">
+        <div class="panel-title">
+          <div>
+            <h2>Enter scores</h2>
+            <p>Fill in as many rows as you need. Empty rows are ignored.</p>
+          </div>
+          <div class="actions">
+            <button class="btn btn-primary" id="add-score" type="button">Add another score</button>
+            <button class="btn btn-secondary" id="reset-all" type="button">Reset all</button>
+          </div>
+        </div>
+
+        <div class="score-list" id="score-list"></div>
+      </div>
+
+      <aside class="panel results">
+        <div>
+          <h2>Live result</h2>
+          <p>The page adds all valid rows and shows the final percentage automatically.</p>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <span>Total score</span>
+            <strong id="total-score">0</strong>
+          </div>
+          <div class="stat">
+            <span>Total out of</span>
+            <strong id="total-out-of">0</strong>
+          </div>
+          <div class="stat">
+            <span>Overall percentage</span>
+            <strong id="overall-percent">0.00%</strong>
+          </div>
+          <div class="stat">
+            <span>Valid score rows</span>
+            <strong id="valid-count">0</strong>
+          </div>
+        </div>
+
+        <div class="output-wrap">
+          <textarea id="copy-output" spellcheck="false" aria-label="Copy-ready result"></textarea>
+          <div class="copy-row">
+            <button class="btn btn-primary" id="copy-summary" type="button">Copy summary</button>
+            <button class="btn btn-secondary" id="copy-total" type="button">Copy total</button>
+            <button class="btn btn-secondary" id="copy-percent" type="button">Copy percent</button>
+          </div>
+          <div class="status" id="status-text"></div>
+          <p class="footer-note">Tip: You can still edit the text box before copying if you want a custom message.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="hero">
+      <div class="eyebrow">Simple score calculator</div>
+      <h1>Add your scores, get the total, copy the result.</h1>
+      <p class="lead">
+        This page is separate from the resume. Type each score in the first box, type what it is out of in the second box, then copy the final result with one button.
+      </p>
+      <div class="hero-note">
+        <div class="note">Starts with 2 rows</div>
+        <div class="note">Add more rows anytime</div>
+        <div class="note">Copy full summary or just the final percentage</div>
+      </div>
+    </section>
+  </main>
+
+  <template id="score-template">
+    <article class="score-card">
+      <div class="score-top">
+        <div class="score-label">Score 1</div>
+        <div class="score-percent">--</div>
+      </div>
+      <div class="score-grid">
+        <div class="field">
+          <label>Score</label>
+          <input class="score-input" type="number" min="0" step="any" placeholder="Example: 18" inputmode="decimal" />
+        </div>
+        <div class="field">
+          <label>Out of</label>
+          <input class="out-of-input" type="number" min="0" step="any" placeholder="Example: 20" inputmode="decimal" />
+        </div>
+        <button class="mini-btn remove-score" type="button">Remove</button>
+      </div>
+    </article>
+  </template>
+
+  <script>
+    const scoreList = document.getElementById("score-list");
+    const template = document.getElementById("score-template");
+    const addButton = document.getElementById("add-score");
+    const resetButton = document.getElementById("reset-all");
+    const totalScoreEl = document.getElementById("total-score");
+    const totalOutOfEl = document.getElementById("total-out-of");
+    const overallPercentEl = document.getElementById("overall-percent");
+    const validCountEl = document.getElementById("valid-count");
+    const copyOutput = document.getElementById("copy-output");
+    const statusText = document.getElementById("status-text");
+
+    function formatNumber(value) {
+      if (!Number.isFinite(value)) {
+        return "0";
+      }
+
+      const rounded = Number(value.toFixed(2));
+      return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(2);
+    }
+
+    function formatPercent(value) {
+      return `${value.toFixed(2)}%`;
+    }
+
+    function setStatus(message) {
+      statusText.textContent = message;
+      if (!message) {
+        return;
+      }
+      window.clearTimeout(setStatus.timer);
+      setStatus.timer = window.setTimeout(() => {
+        statusText.textContent = "";
+      }, 2200);
+    }
+
+    function renumberCards() {
+      const cards = [...scoreList.querySelectorAll(".score-card")];
+      cards.forEach((card, index) => {
+        card.querySelector(".score-label").textContent = `Score ${index + 1}`;
+        const removeButton = card.querySelector(".remove-score");
+        removeButton.disabled = cards.length <= 2;
+        removeButton.style.opacity = cards.length <= 2 ? "0.45" : "1";
+        removeButton.style.cursor = cards.length <= 2 ? "not-allowed" : "pointer";
+      });
+    }
+
+    function buildSummary() {
+      const cards = [...scoreList.querySelectorAll(".score-card")];
+      let totalScore = 0;
+      let totalOutOf = 0;
+      let validCount = 0;
+      const lines = [];
+
+      cards.forEach((card, index) => {
+        const scoreInput = card.querySelector(".score-input");
+        const outOfInput = card.querySelector(".out-of-input");
+        const percentBadge = card.querySelector(".score-percent");
+        const rawScore = scoreInput.value.trim();
+        const rawOutOf = outOfInput.value.trim();
+        const score = Number(rawScore);
+        const outOf = Number(rawOutOf);
+        const validRow = rawScore !== "" && rawOutOf !== "" && Number.isFinite(score) && Number.isFinite(outOf) && outOf > 0;
+
+        if (!validRow) {
+          percentBadge.textContent = rawScore === "" && rawOutOf === "" ? "--" : "Check";
+          return;
+        }
+
+        const percent = (score / outOf) * 100;
+        totalScore += score;
+        totalOutOf += outOf;
+        validCount += 1;
+        percentBadge.textContent = formatPercent(percent);
+        lines.push(`Score ${index + 1}: ${formatNumber(score)} / ${formatNumber(outOf)} = ${formatPercent(percent)}`);
+      });
+
+      const overallPercent = totalOutOf > 0 ? (totalScore / totalOutOf) * 100 : 0;
+      totalScoreEl.textContent = formatNumber(totalScore);
+      totalOutOfEl.textContent = formatNumber(totalOutOf);
+      overallPercentEl.textContent = formatPercent(overallPercent);
+      validCountEl.textContent = String(validCount);
+
+      const summaryLines = validCount > 0
+        ? [
+            "Scores summary",
+            "",
+            ...lines,
+            "",
+            `Total: ${formatNumber(totalScore)} / ${formatNumber(totalOutOf)}`,
+            `Overall: ${formatPercent(overallPercent)}`
+          ]
+        : [
+            "Scores summary",
+            "",
+            "Add at least one valid score to generate the result."
+          ];
+
+      copyOutput.value = summaryLines.join("\n");
+      copyOutput.dataset.total = totalOutOf > 0 ? `${formatNumber(totalScore)} / ${formatNumber(totalOutOf)}` : "";
+      copyOutput.dataset.percent = validCount > 0 ? formatPercent(overallPercent) : "";
+    }
+
+    function addScoreRow(score = "", outOf = "") {
+      const fragment = template.content.cloneNode(true);
+      const card = fragment.querySelector(".score-card");
+      const scoreInput = fragment.querySelector(".score-input");
+      const outOfInput = fragment.querySelector(".out-of-input");
+      const removeButton = fragment.querySelector(".remove-score");
+
+      scoreInput.value = score;
+      outOfInput.value = outOf;
+
+      scoreInput.addEventListener("input", buildSummary);
+      outOfInput.addEventListener("input", buildSummary);
+      removeButton.addEventListener("click", () => {
+        const cards = scoreList.querySelectorAll(".score-card");
+        if (cards.length <= 2) {
+          setStatus("Keep at least 2 score rows.");
+          return;
+        }
+        card.remove();
+        renumberCards();
+        buildSummary();
+      });
+
+      scoreList.appendChild(fragment);
+      renumberCards();
+      buildSummary();
+    }
+
+    async function copyText(text) {
+      if (!text) {
+        setStatus("There is nothing to copy yet.");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(text);
+        setStatus("Copied.");
+      } catch (error) {
+        copyOutput.focus();
+        copyOutput.select();
+        document.execCommand("copy");
+        setStatus("Copied.");
+      }
+    }
+
+    addButton.addEventListener("click", () => {
+      addScoreRow();
+      const lastScoreInput = scoreList.querySelector(".score-card:last-child .score-input");
+      if (lastScoreInput) {
+        lastScoreInput.focus();
+      }
+    });
+
+    resetButton.addEventListener("click", () => {
+      scoreList.innerHTML = "";
+      addScoreRow();
+      addScoreRow();
+      setStatus("All rows cleared.");
+    });
+
+    document.getElementById("copy-summary").addEventListener("click", () => copyText(copyOutput.value));
+    document.getElementById("copy-total").addEventListener("click", () => copyText(copyOutput.dataset.total || ""));
+    document.getElementById("copy-percent").addEventListener("click", () => copyText(copyOutput.dataset.percent || ""));
+
+    addScoreRow();
+    addScoreRow();
+  </script>
+</body>
+</html>
