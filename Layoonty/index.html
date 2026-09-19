@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff6e8">
+  <meta name="description" content="كون صغير من أجلك، يعد الثواني حتى منتصف ليل 28 نوفمبر 2026 بتوقيت الإمارات.">
+  <title>لعيونك | فرحتنا قربت</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='20' fill='%23111d24'/%3E%3Cpath d='M32 8L37 27L56 32L37 37L32 56L27 37L8 32L27 27Z' fill='%23eeb69a'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=3">
+  <script src="script.js?v=3" defer></script>
+</head>
+<body data-theme="golden">
+  <a class="skip-link" href="#countdown">انتقل إلى العد التنازلي</a>
+  <canvas id="stardust" aria-hidden="true"></canvas>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="wordmark" href="#" aria-label="لعيونك، بداية الصفحة"><span class="sparkle" aria-hidden="true">&#10022;</span> لعيونك<span class="wordmark-dot">.</span></a>
+      <div class="header-tools">
+        <span class="edition">كون صغير، من أجلك وحدك</span>
+        <button class="icon-button" id="sound-toggle" aria-label="تشغيل نغمات التفاعل" aria-pressed="false" title="نغمات قصيرة عند التفاعل فقط">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path class="sound-waves" d="M15 8c3 2 3 6 0 8m3-11c5 4 5 10 0 14"/><path class="sound-off" d="m16 10 5 5m0-5-5 5"/></svg>
+        </button>
+        <button class="icon-button" id="theme-toggle" aria-label="تغيير أجواء الصفحة" aria-pressed="false" title="غيّر الأجواء">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 1v3m0 16v3M1 12h3m16 0h3M4.2 4.2l2.1 2.1m11.4 11.4 2.1 2.1M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="live-dot"></span> في انتظار يوم مو مثل باقي الأيام</div>
+          <h1 id="hero-title">باقي شوي…<br>وتكتمل <em>الفرحة!</em></h1>
+          <p class="hero-description">كل يوم نقترب، وكل ثانية لها حلاوتها.<br class="desktop-break"> نعدّ اللحظات لين تبدأ ليلتنا الحلوة.</p>
+          <div class="date-tag"><span class="tiny-star" aria-hidden="true">&#10022;</span><time datetime="2026-11-28T00:00:00+04:00">28 نوفمبر 2026</time><span class="tag-divider"></span><span>12:00 منتصف الليل <span class="muted">الإمارات</span></span></div>
+        </div>
+
+        <div class="celestial" role="img" aria-label="قمر مضيء تدور حوله ثلاث نقاط تتبع الثواني والدقائق والساعات">
+          <div class="orbit orbit-outer"></div>
+          <div class="orbit orbit-middle"></div>
+          <div class="orbit orbit-inner"></div>
+          <div class="orbit-track" id="second-orbit"><span class="satellite satellite-second"></span></div>
+          <div class="orbit-track" id="minute-orbit"><span class="satellite satellite-minute"></span></div>
+          <div class="orbit-track" id="hour-orbit"><span class="satellite satellite-hour"></span></div>
+          <div class="moon-halo"></div>
+          <div class="moon"><div class="moon-grain"></div><div class="moon-date"><span class="moon-small">موعد الفرحة</span><span class="moon-number">28</span><span class="moon-month">نوفمبر</span></div></div>
+          <span class="celestial-star star-one">&#10022;</span><span class="celestial-star star-two">&#10022;</span><span class="celestial-star star-three">+</span>
+          <span class="orbit-caption">حتى القمر ينتظر معنا</span>
+          <span class="orbit-coordinate">25.20° شمالاً · 55.27° شرقاً</span>
+        </div>
+      <section id="countdown" class="countdown-section" aria-labelledby="countdown-heading">
+        <div class="section-overline"><h2 id="countdown-heading">باقي على لحظتنا الحلوة</h2><span class="timezone"><span class="live-dot"></span> دبي <time id="uae-clock">--:--:--</time> <span class="timezone-offset">UTC+4</span></span></div>
+        <div class="countdown" dir="ltr" role="timer" aria-label="الوقت المتبقي حتى بداية يوم 28 نوفمبر 2026 بتوقيت الإمارات" aria-live="off">
+          <div class="time-unit"><span class="time-value" id="days">--</span><span class="time-label">يوم</span><div class="unit-track"><span id="days-track"></span></div></div>
+          <span class="time-separator" aria-hidden="true">:</span>
+          <div class="time-unit"><span class="time-value" id="hours">--</span><span class="time-label">ساعة</span><div class="unit-track"><span id="hours-track"></span></div></div>
+          <span class="time-separator" aria-hidden="true">:</span>
+          <div class="time-unit"><span class="time-value" id="minutes">--</span><span class="time-label">دقيقة</span><div class="unit-track"><span id="minutes-track"></span></div></div>
+          <span class="time-separator" aria-hidden="true">:</span>
+          <div class="time-unit seconds-unit"><span class="time-value" id="seconds">--</span><span class="time-label">ثانية</span><div class="unit-track"><span id="seconds-track"></span></div></div>
+        </div>
+        <p class="countdown-footnote" id="countdown-caption">كل ثانية تروح… تقرّب لنا فرحة!</p>
+        <button class="celebrate-button" id="celebrate-button"><span aria-hidden="true">&#10022;</span> اضغط وخذ رشّة فرح <span aria-hidden="true">&#10022;</span></button>
+        <p class="sr-only" id="arrival-announcement" role="status"></p>
+        <noscript><p class="fallback">موعدنا في بداية يوم 28 نوفمبر 2026، الساعة 12 منتصف الليل بتوقيت الإمارات. فعّل JavaScript لرؤية العد التنازلي.</p></noscript>
+      </section>
+      </section>
+
+      <div class="chapter-heading"><span class="chapter-number">01 / حتى الانتظار له حلاوته</span><span class="chapter-line"></span><span class="tiny-star" aria-hidden="true">&#10022;</span></div>
+      <section class="time-stories" aria-label="ثلاث طرق لطيفة لمشاهدة مرور الوقت">
+        <article class="story-card seconds-card">
+          <div class="card-heading"><span class="card-kicker">دقيقة تتفتّح</span><span class="card-index">01</span></div>
+          <div class="bloom-scene" aria-hidden="true"><svg id="bloom" viewBox="0 0 220 220"><g id="bloom-petals"></g><circle cx="110" cy="110" r="27" class="bloom-center"/></svg><span class="bloom-value" id="bloom-value">00<span>/ 60</span></span></div>
+          <h3>كل ثانية، بتلة جديدة.</h3><p>مع كل ثانية تتفتّح بتلة.<br>ومع كل دقيقة، وردة من جديد.</p>
+          <div class="card-bottom"><span class="live-dot"></span><span id="bloom-caption">شوي شوي، تتفتّح الفرحة</span></div>
+        </article>
+
+        <article class="story-card sand-card">
+          <div class="card-heading"><span class="card-kicker">لحظات تنساب بهدوء</span><span class="card-index">02</span></div>
+          <div class="hourglass-scene" aria-hidden="true">
+            <svg class="hourglass" viewBox="0 0 180 220">
+              <defs><clipPath id="top-glass"><path d="M43 32h94c0 43-22 52-47 76C65 84 43 75 43 32Z"/></clipPath><clipPath id="bottom-glass"><path d="M90 115c25 24 47 33 47 76H43c0-43 22-52 47-76Z"/></clipPath><linearGradient id="sand-color" x2="0" y2="1"><stop stop-color="#f1c8a3"/><stop offset="1" stop-color="#cf8c70"/></linearGradient></defs>
+              <ellipse class="glass-shadow" cx="90" cy="210" rx="58" ry="5"/>
+              <path class="glass-body" d="M37 28h106c0 49-26 62-46 82 20 20 46 33 46 85H37c0-52 26-65 46-85-20-20-46-33-46-82Z"/>
+              <rect id="top-sand" x="40" y="45" width="100" height="70" fill="url(#sand-color)" clip-path="url(#top-glass)"/>
+              <path id="bottom-sand" d="M40 195 90 180 140 195Z" fill="url(#sand-color)" clip-path="url(#bottom-glass)"/>
+              <path class="sand-stream" d="M90 109v80"/><path class="glass-highlight" d="M48 40c2 31 18 43 27 51M48 179c2-25 16-38 26-47"/>
+              <path class="glass-frame" d="M30 26h120M30 197h120"/><circle class="sand-grain" cx="90" cy="125" r="1.6"/><circle class="sand-grain grain-two" cx="90" cy="147" r="1.1"/>
+            </svg>
+          </div>
+          <h3>حتى الهدوء يقرّبنا.</h3><p>رمل ينساب مع دقائق الساعة.<br>وكل حبّة تقول: اقتربنا شوي.</p>
+          <div class="card-bottom"><span class="mini-progress"><span id="hour-progress"></span></span><span id="hour-caption">0% من هذه الساعة</span></div>
+        </article>
+
+        <article class="story-card sky-card">
+          <div class="card-heading"><span class="card-kicker">تحت سماء واحدة</span><span class="card-index">03</span></div>
+          <div class="day-scene" aria-hidden="true">
+            <svg viewBox="0 0 300 195"><defs><linearGradient id="sky-fill" x2="0" y2="1"><stop stop-color="#e8ab87" stop-opacity=".25"/><stop offset="1" stop-color="#e8ab87" stop-opacity="0"/></linearGradient></defs><path d="M26 148a124 112 0 0 1 248 0" fill="url(#sky-fill)"/><path class="day-arc" d="M26 148a124 112 0 0 1 248 0"/><path class="day-horizon" d="M12 148h276"/><path class="dune-back" d="M0 154q56-55 134 4t166-10v47H0Z"/><path class="dune-front" d="M0 176q102-52 177-4t123-7v30H0Z"/><g id="day-sun"><circle class="sun-halo" r="23"/><circle class="sun-core" r="10"/></g><text x="21" y="171" class="sky-hour">00</text><text x="267" y="171" class="sky-hour">24</text></svg>
+          </div>
+          <h3 id="day-heading">والنهار يمشي معنا.</h3><p>يوم كامل يعبر هذا القوس.<br>على إيقاع الوقت في الإمارات.</p>
+          <div class="card-bottom"><span class="live-dot"></span><span id="day-caption">لحظة حلوة في الإمارات</span></div>
+        </article>
+      </section>
+
+      <section class="journey" aria-labelledby="journey-title">
+        <div class="journey-copy"><span class="card-kicker">2026… والحكاية تكتمل</span><h2 id="journey-title">الأشياء الحلوة تستاهل الانتظار.</h2><p>من 16 يوليو 2026، لين موعدنا في نوفمبر.</p></div>
+        <div class="journey-meter"><span class="journey-percent" id="journey-percent">--<small>%</small></span><span class="journey-note" id="journey-note">من الطريق إلى فرحتنا</span><div class="journey-track" role="progressbar" aria-label="الرحلة من 16 يوليو إلى 28 نوفمبر 2026" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="journey-fill"><span class="journey-star">&#10022;</span></span><i></i><i></i><i></i><i></i></div><div class="journey-dates"><span>16 يوليو</span><span>28 نوفمبر <span class="tiny-star">&#10022;</span></span></div></div>
+      </section>
+
+      <div class="chapter-heading"><span class="chapter-number">02 / شويّة سحر</span><span class="chapter-line"></span><span class="tiny-star" aria-hidden="true">&#10022;</span></div>
+      <section class="wish-section" aria-labelledby="wish-title">
+        <div class="wish-constellation" id="wish-constellation" aria-hidden="true"></div>
+        <span class="card-kicker">ولحد ما يوصل يومنا</span>
+        <h2 id="wish-title">خلّ لك أمنية<br>بين <em>النجوم.</em></h2>
+        <p>فكّر بشي حلو، واضغط مطوّلاً على النجمة.<br>مع كل أمنية، كلمة وعبارة حلوة من أجلك.</p>
+        <button class="wish-button" id="wish-button" aria-label="اضغط مطوّلاً لتمنّي أمنية وكشف عبارة جديدة، أو اضغط مفتاح الإدخال"><svg class="wish-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46"/></svg><span aria-hidden="true">&#10022;</span></button>
+        <span class="wish-instruction" id="wish-instruction">اضغط مطوّلاً وتمنّ</span>
+        <div class="wish-message-card" id="wish-message-card" role="status" aria-atomic="true" hidden>
+          <span class="tiny-star" aria-hidden="true">&#10022;</span>
+          <h3 id="wish-word"></h3>
+          <p id="wish-message"></p>
+        </div>
+        <p class="wish-status" id="wish-status" role="status">السماء فيها مكان لكل أمنياتك.</p>
+        <span class="wish-privacy">عدد أمنياتك محفوظ على هذا الجهاز فقط.</span>
+      </section>
+
+      <section class="note-section">
+        <span class="note-line"></span><button class="note-trigger" id="note-trigger" aria-expanded="false" aria-controls="little-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg><span>رسالة صغيرة لك</span><span class="note-plus" aria-hidden="true">+</span></button><span class="note-line"></span>
+        <div class="little-note" id="little-note" hidden><span class="tiny-star" aria-hidden="true">&#10022;</span><h3>يا أحلى من ينتظر،</h3><p>في تواريخ مو بس أرقام في التقويم. في تواريخ تخلّي الأيام العادية أحلى، وتخلّي كلمة «بكرة» تحمل فرحة صغيرة.</p><p>وهذا كون صغير من أجلك. شوية نجوم، وشوية نور، وتذكير إن حتى الانتظار يقدر يكون مليان لحظات حلوة.</p><span class="note-signature">لين تجمعنا لحظة نوفمبر الحلوة.</span></div>
+      </section>
+    </main>
+
+    <footer><a class="wordmark footer-wordmark" href="#">لعيونك<span class="wordmark-dot">.</span></a><span>مصنوعة من لحظات حلوة وشويّة سحر</span><button id="motion-toggle" aria-pressed="false">إيقاف الحركة <span aria-hidden="true">&#8545;</span></button></footer>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+</body>
+</html>
