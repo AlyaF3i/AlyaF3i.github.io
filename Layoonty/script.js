@@ -2,7 +2,7 @@
   'use strict';
 
   // The explicit offset keeps midnight in the UAE, whatever the visitor's timezone.
-  const TARGET = Date.parse('2026-11-28T00:00:00+04:00');
+  const TARGET = Date.parse('2026-11-27T00:00:00+04:00');
   const JOURNEY_START = Date.parse('2026-07-16T00:00:00+04:00');
   const UAE_OFFSET = 4 * 60 * 60 * 1000;
   const DAY = 86400000;
@@ -57,7 +57,7 @@
     arrived = true;
     document.body.classList.add('arrived');
     $('hero-title').innerHTML = 'وصل يومنا…<br>وبدأت <em>الفرحة!</em>';
-    $('countdown-heading').textContent = '28 نوفمبر 2026… لحظتنا صارت هنا!';
+    $('countdown-heading').textContent = '27 نوفمبر 2026… لحظتنا صارت هنا!';
     $('countdown-caption').textContent = 'كل ثانية قرّبتنا لهاللحظة. يا هلا بليلتنا الحلوة!';
     $('arrival-announcement').textContent = 'اكتمل العد التنازلي. وصلت لحظتنا الحلوة!';
     $('wish-title').innerHTML = 'أمنية صغيرة…<br>وبداية <em>حلوة.</em>';
@@ -226,7 +226,7 @@
     drawStars(performance.now());
   }
 
-  function burst(x, y, count = 28) {
+  function burst(x, y, count = 27) {
     if (motionPaused) return;
     for (let i = 0; i < count; i++) {
       const angle = Math.random() * Math.PI * 2;
